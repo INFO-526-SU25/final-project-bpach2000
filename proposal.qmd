@@ -2,7 +2,7 @@
 title: "Crime in Arizona and Across the United States"
 subtitle: "Proposal"
 author: 
-  - name: "Brooke Pacheco and Stacey O'Dell"
+  - name: "Brooke Pacheco, Stacey O'Dell and Meredith Jean-Baptiste"
     affiliations:
       - name: "School of Information, University of Arizona"
 description: "This project will provide a comprehensive analysis of crime data in Arizona and across the United States. We will expose patterns and trends by examining various offense categories, population data, and jurisdiction-level reporting. The analysis will include visualizations to show how crime rates vary within Arizona and among different states nationwide."
@@ -89,10 +89,10 @@ Second, a bar chart showing all 50 states will display the total property crime 
 
 # References
 
-Question 1: Federal Bureau of Investigation (FBI). (2024). Arizona offense type by agency, 2023 [Data set]. U.S. Department of Justice, Crime Data Explorer. https://cde.ucr.cjis.gov/LATEST/webapp/#
+Question 1: Federal Bureau of Investigation (FBI). (2024). Arizona offense type by agency, 2023 \[Data set\]. U.S. Department of Justice, Crime Data Explorer. https://cde.ucr.cjis.gov/LATEST/webapp/#
 
 In-text citation: (FBI, 2024)
 
-Question 2: Federal Bureau of Investigation (FBI). (2024). Crimes against property offenses: Offense category by state, 2023 [Data set]. U.S. Department of Justice, Crime Data Explorer. https://cde.ucr.cjis.gov/LATEST/webapp/#
+Question 2: Federal Bureau of Investigation (FBI). (2024). Crimes against property offenses: Offense category by state, 2023 \[Data set\]. U.S. Department of Justice, Crime Data Explorer. https://cde.ucr.cjis.gov/LATEST/webapp/#
 
 In-text citation: (FBI, 2024)
