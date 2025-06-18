@@ -70,7 +70,7 @@ One member of the team is new to Arizona and is particularly interested in how c
 
 ### Bar plot justification:
 
-Comparing categorical data, such as offense types across different agencies, is best visualized using a bar plot. Offenses will be displayed using grouped or stacked bars for each agency, allowing for a clear visual comparison of the number and types of violent crimes reported by jurisdiction. The x-axis will represent the agency (by jurisdiction), the y-axis will indicate the number of violent crimes, and the fill color of the bars will distinguish between offense types (e.g., murder, aggravated assault, robbery). Color mapping will be used to visually differentiate offense types across agencies. This plot will show which agencies report the highest numbers of violent crimes and the breakdown of those offenses by type.
+Comparing categorical data, such as offense types across different agencies, is best visualized using a bar plot. Offenses will be displayed using grouped or stacked bars for each agency, allowing for a clear visual comparison of the number and types of violent crimes reported by jurisdiction. The x-axis will represent the agency (by jurisdiction), the y-axis will indicate the number of violent crimes, and the fill color of the bars will distinguish between offense types (e.g., murder, aggravated assault, robbery). Color mapping will be used to visually differentiate offense types across agencies. This plot will show which agencies report the highest numbers of violent crimes and the breakdown of those offenses by type. In addition, if the bar plot becomes too dense as a visualization we will use a heat plot. 
 
 ### Scatter plot justification:
 
@@ -86,7 +86,7 @@ First, we intend to use a spatial map to demonstrate the comparison of property 
 
 ### Bar chart justification:
 
-Second, a bar chart showing all 50 states will display the total property crime counts for 2023. This will give a clear view of which states had the highest and lowest numbers overall. Lastly, a percent-of-total bar chart will show all 50 states’ property crime counts as a percentage of the national total. The chart will use a 100% scale, with each state labeled by its percentage (e.g., 2.4%, 5.5%). Together, these three visual displays will create a story that highlights which states have the highest property crime rates. A detailed analysis will be written based on the results of the three statistical displays combined.
+Second, a bar chart showing all 50 states will display the total property crime counts for 2023. This will give a clear view of which states had the highest and lowest numbers overall. Lastly, a percent-of-total bar chart will show all 50 states’ property crime counts as a percentage of the national total. The chart will use a 100% scale, with each state labeled by its percentage (e.g., 2.4%, 5.5%). Together, these three visual displays will create a story that highlights which states have the highest property crime rates. A detailed analysis will be written based on the results of the three statistical displays combined. In addition, if the bar plot becomes too dense as a visualization we will use a heat plot to show comparison between states. 
 
 # References
 
