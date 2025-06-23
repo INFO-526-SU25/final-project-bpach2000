@@ -57,6 +57,14 @@ Which jurisdictions in Arizona had the highest crime rates per capita in 2023, a
 
 Which states had the highest and lowest property crime rates per 100,000 residents in 2023, and what offense categories were most prevalent in those states?
 
+Do violent crime rates differ between urban and rural counties in Arizona?
+
+# Hypothesis
+
+We expect to find higher violent crimes in densely populated, Arizona counties. 
+
+We hypothesize that higher crime rates, including property crime, will be localized in urban counties across Arizona and nationally. 
+
 # Analysis plan
 
 ## Question 1 - Arizona's Highest Crime Rates by Jurisdiction and Offense in 2023
