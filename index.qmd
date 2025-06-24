@@ -20,3 +20,76 @@ execute:
 ## Abstract
 
 Add project abstract here.
+
+
+## Plot Setup
+
+```{r setup}
+# load packages
+library(tidyverse)
+library(glue)
+library(here)
+library(countdown)
+library(ggthemes)
+library(gt)
+library(openintro)
+library(ggrepel)
+library(patchwork)
+
+# set theme for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
+
+# set width of code output
+options(width = 65)
+
+# set figure parameters for knitr
+knitr::opts_chunk$set(
+  fig.width = 7,        # 7" width
+  fig.asp = 0.618,      # the golden ratio
+  fig.retina = 3,       # dpi multiplier for displaying HTML output on retina
+  fig.align = "center", # center align figures
+  dpi = 300             # higher dpi, sharper image
+)
+
+if (!require("pacman")) 
+  install.packages("pacman")
+
+# use this line for installing/loading
+pacman::p_load(tidyverse,
+               glue,
+               scales,
+               ggthemes) 
+
+devtools::install_github("tidyverse/dsbox")
+
+```
+
+
+## Question 1
+
+```{r Arizona crime plots}
+
+# Load and remove meta data from the first 4 rows
+az_crimes <- read_csv(here("data", "Arizona_Offense_Type_by_Agency_2023.csv"), skip = 4, show_col_types = FALSE)
+
+# Select only city and crime columns of interest and rename
+az_clean <- az_crimes %>%
+  select(
+    City = ...2,
+    Crimes_Against_Persons = `Crimes Against Persons`,
+    Crimes_Against_Property = `Crimes Against Property`,
+    Crimes_Against_Society = `Crimes Against Society`
+  ) %>%
+  # Remove rows where City is NA or empty
+  filter(!is.na(City) & City != "") %>%
+  # Convert crime columns to numeric
+  mutate(across(starts_with("Crimes_"), ~ as.numeric(str_replace_all(., ",", "")))) %>%
+  # Remove rows where all crime counts are NA or zero
+  filter(rowSums(across(starts_with("Crimes_"), ~ ifelse(is.na(.), 0, .))) > 0)
+
+```
+
+### Sources
+
+Referenced to use across function:
+https://dplyr.tidyverse.org/reference/across.html

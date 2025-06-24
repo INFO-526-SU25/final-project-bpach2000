@@ -27,7 +27,7 @@ library(here)
 
 # Dataset
 
-The Federal Bureau of Investigation (FBI) oversees the Uniform Crime Reporting (UCR) program, a nationwide initiative designed to gather and share crime data from across the United States. Participation in the UCR program is mandated for local, state, tribal, and federal law enforcement agencies, each of which is responsible for submitting a standardized set of crime data to the FBI on an annual basis. For the purposes of this proposal, two data sets were extracted from the FBI’s Crime Data Explorer platform. Data cleaning will take place prior to data analysis, the team will remove newline characters, 'NA', or missing data. The column names will also be renamed and numeric labels will be reassigned as characters. Crime rates will be manually calculated for both datasets. After the data has been modified, we will add a loading and cleaning label. We will only be evaluating datasets from 2023. 
+The Federal Bureau of Investigation (FBI) oversees the Uniform Crime Reporting (UCR) program, a nationwide initiative designed to gather and share crime data from across the United States. Participation in the UCR program is mandated for local, state, tribal, and federal law enforcement agencies, each of which is responsible for submitting a standardized set of crime data to the FBI on an annual basis. For the purposes of this proposal, two data sets were extracted from the FBI’s Crime Data Explorer platform. Data cleaning will take place prior to data analysis, the team will remove newline characters, 'NA', or missing data. The column names will also be renamed and numeric labels will be reassigned as characters. Crime rates will be manually calculated for both datasets. After the data has been modified, we will add a loading and cleaning label. We will only be evaluating datasets from 2023.
 
 ## Dataset 1
 
@@ -49,7 +49,7 @@ property <- read_csv(here(
   glimpse()
 ```
 
-The second dataset includes crime statistics from all 50 states, organized by offense group and population for 2023. The team will be extracting property crimes by state from the dataset. 
+The second dataset includes crime statistics from all 50 states, organized by offense group and population for 2023. The team will be extracting property crimes by state from the dataset.
 
 # Questions
 
@@ -61,9 +61,9 @@ Do violent crime rates differ between urban and rural counties in Arizona?
 
 # Hypothesis
 
-We expect to find higher violent crimes in densely populated, Arizona counties. 
+We expect to find higher violent crimes in densely populated, Arizona counties.
 
-We hypothesize that higher crime rates, including property crime, will be localized in urban counties across Arizona and nationally. 
+We hypothesize that higher crime rates, including property crime, will be localized in urban counties across Arizona and nationally.
 
 # Analysis plan
 
@@ -77,7 +77,7 @@ One member of the team is new to Arizona and is particularly interested in how c
 
 ### Bar plot justification:
 
-Comparing categorical data, such as offense types across different agencies, is best visualized using a bar plot. Offenses will be displayed using grouped or stacked bars for each agency, allowing for a clear visual comparison of the number and types of violent crimes reported by jurisdiction. The x-axis will represent the agency (by jurisdiction), the y-axis will indicate the number of violent crimes, and the fill color of the bars will distinguish between offense types (e.g., murder, aggravated assault, robbery). Color mapping will be used to visually differentiate offense types across agencies. This plot will show which agencies report the highest numbers of violent crimes and the breakdown of those offenses by type. In addition, if the bar plot becomes too dense as a visualization we will use a heat plot. 
+Comparing categorical data, such as offense types across different agencies, is best visualized using a bar plot. Offenses will be displayed using grouped or stacked bars for each agency, allowing for a clear visual comparison of the number and types of violent crimes reported by jurisdiction. The x-axis will represent the agency (by jurisdiction), the y-axis will indicate the number of violent crimes, and the fill color of the bars will distinguish between offense types (e.g., murder, aggravated assault, robbery). Color mapping will be used to visually differentiate offense types across agencies. This plot will show which agencies report the highest numbers of violent crimes and the breakdown of those offenses by type. In addition, if the bar plot becomes too dense as a visualization we will use a heat plot.
 
 ### Scatter plot justification:
 
@@ -93,7 +93,7 @@ First, we intend to use a spatial map to demonstrate the comparison of property 
 
 ### Bar chart justification:
 
-Second, a bar chart showing all 50 states will display the total property crime counts for 2023. This will give a clear view of which states had the highest and lowest numbers overall. Lastly, a percent-of-total bar chart will show all 50 states’ property crime counts as a percentage of the national total. The chart will use a 100% scale, with each state labeled by its percentage (e.g., 2.4%, 5.5%). Together, these three visual displays will create a story that highlights which states have the highest property crime rates. A detailed analysis will be written based on the results of the three statistical displays combined. In addition, if the bar plot becomes too dense as a visualization we will use a heat plot to show comparison between states. 
+Second, a bar chart showing all 50 states will display the total property crime counts for 2023. This will give a clear view of which states had the highest and lowest numbers overall. Lastly, a percent-of-total bar chart will show all 50 states’ property crime counts as a percentage of the national total. The chart will use a 100% scale, with each state labeled by its percentage (e.g., 2.4%, 5.5%). Together, these three visual displays will create a story that highlights which states have the highest property crime rates. A detailed analysis will be written based on the results of the three statistical displays combined. In addition, if the bar plot becomes too dense as a visualization we will use a heat plot to show comparison between states.
 
 # References
 
