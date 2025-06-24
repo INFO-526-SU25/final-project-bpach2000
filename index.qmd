@@ -21,8 +21,7 @@ execute:
 
 Add project abstract here.
 
-
-## Plot Setup
+### Plot Setup
 
 ```{r setup}
 # load packages
@@ -64,8 +63,20 @@ devtools::install_github("tidyverse/dsbox")
 
 ```
 
+## Introduction - dataset 1
 
-## Question 1
+Introduction: The introduction provides a clear explanation of the question and the dataset used to answer the question, including a description of all relevant variables in the dataset. (5 points) Meredith
+
+## Justification of approach - data set1
+
+The chosen analysis approach and visualizations are clearly explained and justified. (4 points) Stacey
+
+## Code and Visualization - data set1
+
+Code is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke 
+The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke
+
+## Code block 1
 
 ```{r Arizona crime plots}
 
@@ -89,7 +100,29 @@ az_clean <- az_crimes %>%
 
 ```
 
-### Sources
+## Discussion 2
+
+Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith
+
+## Introduction - dataset 2
+
+Introduction: The introduction provides a clear explanation of the question and the dataset used to answer the question, including a description of all relevant variables in the dataset. (5 points) Meredith
+
+
+## Justification of approach - data set 2
+
+The chosen analysis approach and visualizations are clearly explained and justified. (4 points) Stacey
+
+## Code and Visualization - data set 2
+
+Code is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke 
+The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke
+
+## Discussion 2
+
+Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith 
+
+## Sources
 
 Referenced to use across function:
 https://dplyr.tidyverse.org/reference/across.html
