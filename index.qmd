@@ -19,7 +19,7 @@ execute:
 
 ## Abstract
 
-Add project abstract here.
+This topic was chosen as members of our team have extensive experience in or interest in crime data. The two datasets are from 2023 that were analyzed for this project. The first are violent crimes across Arizona by FBI jurisdiction, and the second are national property crimes by state. The result of the data analysis
 
 ### Plot Setup
 
@@ -65,7 +65,11 @@ devtools::install_github("tidyverse/dsbox")
 
 ## Introduction - dataset 1
 
-Introduction: The introduction provides a clear explanation of the question and the dataset used to answer the question, including a description of all relevant variables in the dataset. (5 points) Meredith
+The first dataset is specific to Arizona and includes violent crimes which are broken down into crimes against property, crimes against society and crimes against persons. Each of these categories is further broken down into a large number of subcategories. For clarity, the team focused on the three categories: Property, Persons and Society. We sought to understand how violent crime is distributed geographically, and which types of offenses are most prevalent in different areas. We aim to analyze the state of Arizona data on: crimes against persons, crimes against property and crimes against society.
+
+We seek to answer the following research questions from the first dataset: 1. Which jurisdictions in Arizona had the highest crime rates per capita in 2023, and which specific offenses contributed most to those rates? 2. Do violent crime rates differ between urban and rural areas of Arizona?
+
+We hypothesize that: 1. Higher violent crimes will be found in more densely populated areas of Arizona. 2. Property crime offenses will be greater than crimes against society, which will be greater than crimes against persons.
 
 ## Justification of approach - data set1
 
@@ -73,8 +77,7 @@ The chosen analysis approach and visualizations are clearly explained and justif
 
 ## Code and Visualization - data set1
 
-Code is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke 
-The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke
+Code is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke
 
 ## Code block 1
 
@@ -100,14 +103,19 @@ az_clean <- az_crimes %>%
 
 ```
 
-## Discussion 2
+## Discussion 1: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith
 
-Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith
+The first research question : "Which jurisdictions in Arizona had the highest crime rates per capita in 2023, and which specific offenses contributed most to those rates?" Can be visualized from the scatterplot/ barplot graph #1. We see the specific offenses listed as “Property”, “Person” and “Society” by jurisdiction. It is evident that \_\_\_\_\_ jurisdiction had the highest crime rate at \_\_\_\_\_ total crimes. The highest offenses per jurisdiction are “Property/Person/Society” with \_\_\_\_\_ offenses per capita.
 
-## Introduction - dataset 2
+The second research question: "Do violent crime rates differ between urban and rural counties in Arizona?" Can be seen in the scatterplot/ bar graph #2. We see the specific offenses listed as “Property”, “Person” and “Society” by population. We see here that \_\_\_\_\_ jurisdiction had the highest crime rate per capita.
 
-Introduction: The introduction provides a clear explanation of the question and the dataset used to answer the question, including a description of all relevant variables in the dataset. (5 points) Meredith
+## Introduction - dataset 2 : The introduction provides a clear explanation of the question and the dataset used to answer the question, including a description of all relevant variables in the dataset. (5 points) Meredith
 
+Dataset 2 is a set of national property crime rates by state. This information is important, in order to better understand whether there was an association between population size and property crime across the US, and which states were most affected. The national dataset is limited to property crimes specifically. Given the vast numbers of property crimes (arson, bribery, burglary/ breaking & entry, counterfeiting, destruction, embezzlement, extortion, fraud, larceny, motor vehicle theft, robbery and stolen property), the team focused on total crime rates per state and per capita.
+
+We seek to answer the following research question from the first dataset: 2. Which states had the highest and lowest property crime rates per 100,000 residents in 2023?
+
+We hypothesize that : 2. Higher property crime rates nationally will be found in more densely populated states.
 
 ## Justification of approach - data set 2
 
@@ -115,14 +123,12 @@ The chosen analysis approach and visualizations are clearly explained and justif
 
 ## Code and Visualization - data set 2
 
-Code is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke 
-The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke
+Code is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke
 
-## Discussion 2
+## Discussion 2: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith
 
-Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith 
+The third research question : "Which states had the highest and lowest property crime rates per 100,000 residents in 2023?" Can be visualized from the bar graph #3. We see Property crimes per capita in this plot with the state of \_\_\_\_\_ having the highest property crime rate per capita at \_\_\_\_\_ crimes per \_\_\_\_\_ population. Lastly, we can better visualize the states with the highest crime rates in the national heat map in graph #4. This shows the state of \_\_\_\_\_ has the highest property crimes.
 
 ## Sources
 
-Referenced to use across function:
-https://dplyr.tidyverse.org/reference/across.html
+Referenced to use across function: https://dplyr.tidyverse.org/reference/across.html
