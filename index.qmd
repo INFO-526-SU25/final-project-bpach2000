@@ -37,6 +37,7 @@ library(patchwork)
 library(tigris)
 library(viridis)
 library(sf)
+library(maps)
 
 # set theme for ggplot2
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
@@ -68,7 +69,7 @@ devtools::install_github("tidyverse/dsbox")
 
 ## Introduction - dataset 1
 
-Our team’s shared background in data analysis—and genuine curiosity about public safety—led us to dive into Arizona’s violent crime dataset. The data splits offenses into three overarching groups—Property, Persons, and Society—each of which contains numerous subcategories. To keep our focus sharp, we concentrated on those three main categories. We set out to map how violent crime varies across Arizona’s jurisdictions and to pinpoint which offense types dominate in different regions. In particular, we will analyze crimes against persons, crimes against property, and crimes against society throughout the state. 
+Our team’s shared background in data analysis—and genuine curiosity about public safety—led us to dive into Arizona’s violent crime dataset. The data splits offenses into three overarching groups—Property, Persons, and Society—each of which contains numerous subcategories. To keep our focus sharp, we concentrated on those three main categories. We set out to map how violent crime varies across Arizona’s jurisdictions and to pinpoint which offense types dominate in different regions. In particular, we will analyze most frequently reported crimes.
 
 Here are the two key research questions we’re tackling using the Arizona dataset:
 (1) Which cities recorded the highest per-capita crime rates in 2023, and which specific offenses drove those rates? 
@@ -174,7 +175,11 @@ ggplot() +
   labs(
     title = "Arizona Cities by Total Number of Crimes (All Offenses)",
     size = "Total Crimes"
-  ) 
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title = element_text(hjust = 0)
+  )
 
 # Get the top five cities with the most crime and store in descending order
 top5_cities <- az_points %>%
@@ -191,6 +196,10 @@ ggplot(top5_cities, aes(x = Total_Crimes, y = reorder(City, Total_Crimes), fill 
     x = "Total Crimes",
     y = "City",
     fill = "Most Common Crime"
+  ) +
+  theme(
+    legend.key.size = unit(0.5, "cm"),  
+    legend.text = element_text(size = 10) 
   )
 
 ```
@@ -248,7 +257,141 @@ volumes. Displaying burglary, larceny/theft, vehicle theft, and vandalism side b
 ## Code and Visualization - data set 2
 
 ```{r Population crime plots}
-# TODO ASK STACEY
+
+# Load cleaned property‐crime data
+# property_crimes <- read.csv("nibrs_2023_property_crimes_only.csv",
+#                             stringsAsFactors = FALSE)
+
+property_crimes <- read.csv(here("data", "nibrs_2023_property_crimes_only.csv"), stringsAsFactors = FALSE)
+
+us_map <- map_data("state") %>%
+  mutate(region = tools::toTitleCase(region))
+
+crime_map <- us_map %>%
+  left_join(property_crimes, by = c("region" = "State"))
+
+# Create visual 1 - choropleth map of Property Crimes per 100,000 Population by State
+ggplot(crime_map,
+       aes(long, lat, group = group, fill = Property_Crime_Rate)) +
+  geom_polygon(color = "white", size = 0.2) +
+  scale_fill_viridis(option = "inferno", direction = -1,
+                     name = "Rate per\n100,000") +
+  guides(fill = guide_colorbar(
+    barwidth = 15, barheight = 0.5,
+    title.position = "top", title.hjust = 0.5
+  )) +
+  labs(
+    title    = "Property Crimes per 100,000 Population by State (2023)",
+    subtitle = "Darker shades indicate higher property-crime rates"
+  ) +
+  theme_void(base_size = 14) +
+  theme(
+    legend.position   = "bottom",
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.title      = element_text(face = "bold"),
+    plot.title        = element_text(face = "bold", size = 16),
+    plot.subtitle     = element_text(size = 12),
+    plot.background   = element_rect(fill = "white", color = NA),
+    panel.background  = element_rect(fill = "white", color = NA)
+  ) +
+  coord_fixed(1.3)
+
+top_states <- property_crimes %>%
+  arrange(desc(Total_Property_Crimes)) %>%
+  slice(1:10) %>%
+  select(State,
+         Burglary_Rate,
+         Larceny_Rate,
+         Vehicle_Theft_Rate,
+         Vandalism_Rate) %>%
+  pivot_longer(-State, names_to = "Crime_Type", values_to = "Rate") %>%
+  mutate(
+    Crime_Type = case_when(
+      Crime_Type == "Burglary_Rate"      ~ "Burglary",
+      Crime_Type == "Larceny_Rate"       ~ "Larceny/Theft",
+      Crime_Type == "Vehicle_Theft_Rate" ~ "Vehicle Theft",
+      Crime_Type == "Vandalism_Rate"     ~ "Vandalism"
+    )
+  ) %>%
+  group_by(State) %>%
+  mutate(Percent = round(Rate / sum(Rate) * 100))
+
+# Create visual 2 - dodged bar chart of Property Crimes: Breakdown by Type in Top-10 States
+ggplot(top_states, aes(State, Rate, fill = Crime_Type)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+  geom_text(aes(label = paste0(Percent, "%")),
+            position = position_dodge(width = 0.8),
+            vjust = -0.4, size = 3) +
+  scale_fill_manual(values = c(
+    "Burglary"      = "#1f78b4",
+    "Larceny/Theft" = "#33a02c",
+    "Vehicle Theft" = "#ff7f00",
+    "Vandalism"     = "#e31a1c"
+  )) +
+  labs(
+    title    = "Property Crimes: Breakdown by Type in Top-10 States (2023)",
+    subtitle = "Rates per 100,000 residents; labels show each subtype’s share",
+    x        = NULL,
+    y        = "Rate per 100,000",
+    fill     = "Crime Type"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x   = element_text(angle = 45, hjust = 1),
+    plot.title    = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12)
+  )
+
+lolli_data <- property_crimes %>%
+  select(State, Property_Crime_Rate) %>%
+  arrange(Property_Crime_Rate) %>%
+  mutate(
+    State     = factor(State, levels = State),
+    y_pos     = as.numeric(State) * 1.5,  # increase spacing
+    RankGroup = case_when(
+      row_number() <= 5         ~ "Bottom 5 States",
+      row_number() > n() - 5    ~ "Top 5 States",
+      TRUE                      ~ "Middle States"
+    )
+  )
+
+low_cut  <- max(filter(lolli_data, RankGroup == "Bottom 5 States")$Property_Crime_Rate)
+high_cut <- min(filter(lolli_data, RankGroup == "Top 5 States")$Property_Crime_Rate)
+
+# Creat visual 3 - Cleveland dot plot of Property Crimes per 100K by State (2023) spaced for all 50 states, straight labels, legend for cutoffs
+ggplot(lolli_data, aes(x = Property_Crime_Rate, y = y_pos, color = RankGroup)) +
+  geom_segment(aes(x = 0, xend = Property_Crime_Rate, yend = y_pos),
+               size = 0.6) +
+  geom_point(size = 3) +
+  geom_vline(aes(xintercept = low_cut, linetype = "Bottom-5 cutoff"), color = "grey50") +
+  geom_vline(aes(xintercept = high_cut, linetype = "Top-5 cutoff"), color = "grey50") +
+  scale_color_manual(name = "State Group", values = c(
+    "Top 5 States"    = "#ff7f00",
+    "Middle States"   = "grey70",
+    "Bottom 5 States" = "#1f78b4"
+  )) +
+  scale_linetype_manual(name = "Cutoff Lines", values = c(
+    "Bottom-5 cutoff" = "dashed",
+    "Top-5 cutoff"    = "dashed"
+  )) +
+  scale_y_continuous(
+    breaks = lolli_data$y_pos,
+    labels = lolli_data$State,
+    expand = expansion(add = c(0, 1))
+  ) +
+  labs(
+    title    = "Property Crimes per 100K by State (2023)",
+    subtitle = "Dashed lines mark bottom-5 and top-5 cutoffs",
+    x        = "Rate per 100,000 Residents",
+    y        = NULL
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.y     = element_text(size = 4, color = "black"),
+    plot.title      = element_text(face = "bold", size = 16),
+    plot.subtitle   = element_text(size = 12),
+    legend.position = "top"
+  )
 
 ```
 
