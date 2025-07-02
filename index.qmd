@@ -71,7 +71,7 @@ devtools::install_github("tidyverse/dsbox")
 Our team’s shared background in data analysis—and genuine curiosity about public safety—led us to dive into Arizona’s violent crime dataset. The data splits offenses into three overarching groups—Property, Persons, and Society—each of which contains numerous subcategories. To keep our focus sharp, we concentrated on those three main categories. We set out to map how violent crime varies across Arizona’s jurisdictions and to pinpoint which offense types dominate in different regions. In particular, we will analyze crimes against persons, crimes against property, and crimes against society throughout the state. 
 
 Here are the two key research questions we’re tackling using the Arizona dataset:
-(1) Which jurisdictions recorded the highest per-capita crime rates in 2023, and which specific offenses drove those rates? 
+(1) Which cities recorded the highest per-capita crime rates in 2023, and which specific offenses drove those rates? 
 (2)How do violent crime rates in Arizona compare between urban and rural areas? 
 
 We propose two hypotheses for our Arizona analysis:
@@ -80,7 +80,11 @@ We propose two hypotheses for our Arizona analysis:
 
 ## Justification of approach - data set1
 
-The chosen analysis approach and visualizations are clearly explained and justified. (4 points) BROOKE TODO
+This R script processes Arizona crime data by agency for 2023 and produces two key visualizations to communicate crime patterns across the state. The chosen analysis approaches were selected to address the imitations of the dataset while providing clear and interpretable visualizations.
+
+The first plot is a geospatial map of Arizona cities by total crimes. We chose this foramt because it allows for an intuitive spatial comparison of crime totals in different geographic locations. Given the large number of cities in the dataset, this map format helps users quickly identify areas with higher crime activity by scaling the size of city points relative to total crime counts. The map uses a consistent color for all points to maintain clarity and avoid visual clutter. City names are labeled on the map, providing geographic context without overwhelming the visualization. The decision to size points based on total crime counts makes it easy to visually distinguish between cities with low, medium, and high crime levels while preserving the map’s readability.
+
+The second plot is a bar Plot of the top 5 Arizona cities by total and type of crimes, to show a more detailed comparison. Given that there are too many cities to compare meaningfully in a single bar plot, narrowing the focus to the top five provides a more digestible comparison. The bar plot arranges cities in descending order, making it easy for viewers to immediately identify which cities experience the most crime. Additionally, each bar is color-coded according to the most common crime type in that city (e.g., Assault Offenses, Drug/Narcotic Offenses, Theft Offenses). 
 
 ## Code and Visualization - data set1
 
@@ -170,8 +174,7 @@ ggplot() +
   labs(
     title = "Arizona Cities by Total Number of Crimes (All Offenses)",
     size = "Total Crimes"
-  ) +
-  theme_minimal()
+  ) 
 
 # Get the top five cities with the most crime and store in descending order
 top5_cities <- az_points %>%
@@ -188,19 +191,23 @@ ggplot(top5_cities, aes(x = Total_Crimes, y = reorder(City, Total_Crimes), fill 
     x = "Total Crimes",
     y = "City",
     fill = "Most Common Crime"
-  ) +
-  theme_minimal() 
-
+  )
 
 ```
 
-## Discussion 1: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) 
+## Discussion 1
 
-BROOOKE TODO
+RQ1: Which cities recorded the highest per-capita crime rates in 2023, and which specific offenses drove those rates?
 
-The first research question : "Which jurisdictions in Arizona had the highest crime rates per capita in 2023, and which specific offenses contributed most to those rates?" Can be visualized from the scatterplot/ barplot graph #1. We see the specific offenses listed as “Property”, “Person” and “Society” by jurisdiction. It is evident that \_\_\_\_\_ jurisdiction had the highest crime rate at \_\_\_\_\_ total crimes. The highest offenses per jurisdiction are “Property/Person/Society” with \_\_\_\_\_ offenses per capita.
+The bar plot addresses this question, highlighting Mesa, Glendale, Tempe, Pima, and Scottsdale as the cities with the highest total crime counts in Arizona. Mesa leads with nearly 60,000 reported offenses in 2023, with Drug and Narcotic Offenses being the most common category. Glendale follows with almost 40,000 total crimes, primarily driven by Assault Offenses. Tempe, Pima, and Scottsdale each reported close to 30,000 offenses, with Larceny and Theft Offenses being the most prevalent in these cities.
 
-The second research question: "Do violent crime rates differ between urban and rural counties in Arizona?" Can be seen in the scatterplot/ bar graph #2. We see the specific offenses listed as “Property”, “Person” and “Society” by population. We see here that \_\_\_\_\_ jurisdiction had the highest crime rate per capita.
+In the geospatial map (first plot), the larger point sizes around the Phoenix metropolitan area—including these neighboring cities—visually demonstrate that this region experiences the highest concentration of crime activity in Arizona.
+
+RQ2: How do violent crime rates in Arizona compare between urban and rural areas?
+
+The geospatial map reveals that, as expected, major cities report the highest total crime counts, indicated by larger points clustered in urban areas like Phoenix, Mesa, and Glendale. While it was initially anticipated that crime would be concentrated exclusively in urban centers, the map also shows that some smaller cities by population, such as Safford and Camp Verde, recorded notable crime totals relative to their size.
+
+Although violent crimes are generally more frequent in large metropolitan areas, this finding suggests that certain rural and suburban areas in Arizona also experience considerable crime rates, warranting attention when comparing crime patterns across different population centers in the state.
 
 ## Introduction - dataset 2
 
@@ -240,7 +247,7 @@ volumes. Displaying burglary, larceny/theft, vehicle theft, and vandalism side b
 
 ## Code and Visualization - data set 2
 
-```{r Arizona crime plots}
+```{r Population crime plots}
 # TODO ASK STACEY
 
 ```
