@@ -32,14 +32,14 @@
     "href": "index.html",
     "title": "Project Title",
     "section": "",
-    "text": "Add project abstract here."
+    "text": "This topic was chosen as members of our team have extensive experience in or interest in crime data. The two datasets are from 2023 that were analyzed for this project. The first are violent crimes across Arizona by FBI jurisdiction, and the second are national property crimes by state. The result of the data analysis"
   },
   {
     "objectID": "index.html#abstract",
     "href": "index.html#abstract",
     "title": "Project Title",
     "section": "",
-    "text": "Add project abstract here."
+    "text": "This topic was chosen as members of our team have extensive experience in or interest in crime data. The two datasets are from 2023 that were analyzed for this project. The first are violent crimes across Arizona by FBI jurisdiction, and the second are national property crimes by state. The result of the data analysis"
   },
   {
     "objectID": "presentation.html#quarto",
@@ -194,5 +194,75 @@
     "title": "Project Title",
     "section": "Question 1",
     "text": "Question 1\n\n\nRows: 83\nColumns: 68\n$ Arizona &lt;chr&gt; \"Offense Type\", \"by Agency, 2023\", \"Agency Type…\n$ ...2    &lt;chr&gt; NA, NA, \"Agency Name\", NA, \"Apache Junction\", \"…\n$ ...3    &lt;chr&gt; NA, NA, \"Population1\", NA, \"40,917\", \"92,661\", …\n$ ...4    &lt;chr&gt; NA, NA, \"Total\\nOffenses\", NA, \"2,652\", \"6,098\"…\n$ ...5    &lt;chr&gt; NA, NA, \"Crimes\\nAgainst\\nPersons\", NA, \"806\", …\n$ ...6    &lt;chr&gt; NA, NA, \"Crimes\\nAgainst\\nProperty\", NA, \"1,192…\n$ ...7    &lt;chr&gt; NA, NA, \"Crimes\\nAgainst\\nSociety\", NA, \"654\", …\n$ ...8    &lt;chr&gt; NA, NA, \"Crimes Against Persons\", \"Assault\\nOff…\n$ ...9    &lt;chr&gt; NA, NA, NA, \"Aggravated\\nAssault\", \"169\", \"291\"…\n$ ...10   &lt;chr&gt; NA, NA, NA, \"Simple\\nAssault\", \"418\", \"1,199\", …\n$ ...11   &lt;chr&gt; NA, NA, NA, \"Intimidation\", \"115\", \"224\", \"12\",…\n$ ...12   &lt;chr&gt; NA, NA, NA, \"Homicide\\nOffenses\", \"6\", \"9\", \"0\"…\n$ ...13   &lt;chr&gt; NA, NA, NA, \"Murder and\\nNonnegligent\\nManslaug…\n$ ...14   &lt;chr&gt; NA, NA, NA, \"Negligent\\nMan-\\nslaughter\", \"2\", …\n$ ...15   &lt;chr&gt; NA, NA, NA, \"Justifiable\\nHomicide\", \"0\", \"2\", …\n$ ...16   &lt;chr&gt; NA, NA, NA, \"Human\\nTrafficking\\nOffenses\", \"0\"…\n$ ...17   &lt;chr&gt; NA, NA, NA, \"Commercial\\nSex Acts\", \"0\", \"0\", \"…\n$ ...18   &lt;chr&gt; NA, NA, NA, \"Involuntary\\nServitude\", \"0\", \"0\",…\n$ ...19   &lt;chr&gt; NA, NA, NA, \"Kidnapping/\\nAbduction\", \"15\", \"7\"…\n$ ...20   &lt;chr&gt; NA, NA, NA, \"Sex\\nOffenses\", \"83\", \"129\", \"6\", …\n$ ...21   &lt;chr&gt; NA, NA, NA, \"Rape\", \"25\", \"41\", \"0\", \"53\", \"7\",…\n$ ...22   &lt;chr&gt; NA, NA, NA, \"Sodomy\", \"3\", \"0\", \"0\", \"1\", \"0\", …\n$ ...23   &lt;chr&gt; NA, NA, NA, \"Sexual\\nAssault\\nWith an\\nObject\",…\n$ ...24   &lt;chr&gt; NA, NA, NA, \"Criminal\\nSexual\\nContact2\", \"52\",…\n$ ...25   &lt;chr&gt; NA, NA, NA, \"Incest\", \"0\", \"0\", \"0\", \"1\", \"0\", …\n$ ...26   &lt;chr&gt; NA, NA, NA, \"Statutory\\nRape\", \"3\", \"10\", \"0\", …\n$ ...27   &lt;chr&gt; NA, NA, \"Crimes Against Property\", \"Arson\", \"6\"…\n$ ...28   &lt;chr&gt; NA, NA, NA, \"Bribery\", \"0\", \"0\", \"0\", \"1\", \"0\",…\n$ ...29   &lt;chr&gt; NA, NA, NA, \"Burglary/\\nBreaking &\\nEntering\", …\n$ ...30   &lt;chr&gt; NA, NA, NA, \"Counter-\\nfeiting/\\nForgery\", \"16\"…\n$ ...31   &lt;chr&gt; NA, NA, NA, \"Destruction/\\nDamage/\\nVandalism\\n…\n$ ...32   &lt;chr&gt; NA, NA, NA, \"Embezzle-\\nment\", \"4\", \"7\", \"0\", \"…\n$ ...33   &lt;chr&gt; NA, NA, NA, \"Extortion/\\nBlackmail\", \"3\", \"29\",…\n$ ...34   &lt;chr&gt; NA, NA, NA, \"Fraud\\nOffenses\", \"163\", \"407\", \"6…\n$ ...35   &lt;chr&gt; NA, NA, NA, \"False\\nPretenses/\\nSwindle/\\nConfi…\n$ ...36   &lt;chr&gt; NA, NA, NA, \"Credit\\nCard/\\nAutomated\\nTeller\\n…\n$ ...37   &lt;chr&gt; NA, NA, NA, \"Imper-\\nsonation\", \"25\", \"38\", \"2\"…\n$ ...38   &lt;chr&gt; NA, NA, NA, \"Welfare\\nFraud\", \"0\", \"1\", \"0\", \"0…\n$ ...39   &lt;chr&gt; NA, NA, NA, \"Wire\\nFraud\", \"0\", \"11\", \"0\", \"7\",…\n$ ...40   &lt;chr&gt; NA, NA, NA, \"Identity \\nTheft\", \"44\", \"104\", \"0…\n$ ...41   &lt;chr&gt; NA, NA, NA, \"Hacking/\\nComputer \\nInvasion\", \"0…\n$ ...42   &lt;chr&gt; NA, NA, NA, \"Larceny/\\nTheft\\nOffenses\", \"543\",…\n$ ...43   &lt;chr&gt; NA, NA, NA, \"Pocket-\\npicking\", \"0\", \"4\", \"0\", …\n$ ...44   &lt;chr&gt; NA, NA, NA, \"Purse-\\nsnatching\", \"0\", \"2\", \"0\",…\n$ ...45   &lt;chr&gt; NA, NA, NA, \"Shop-\\nlifting\", \"124\", \"745\", \"6\"…\n$ ...46   &lt;chr&gt; NA, NA, NA, \"Theft\\nFrom\\nBuilding\", \"30\", \"18\"…\n$ ...47   &lt;chr&gt; NA, NA, NA, \"Theft\\nFrom\\nCoin Op-\\nerated\\nMac…\n$ ...48   &lt;chr&gt; NA, NA, NA, \"Theft\\nFrom\\nMotor\\nVehicle\", \"111…\n$ ...49   &lt;chr&gt; NA, NA, NA, \"Theft of \\nMotor \\nVehicle\\nParts …\n$ ...50   &lt;chr&gt; NA, NA, NA, \"All\\nOther\\nLarceny\", \"261\", \"630\"…\n$ ...51   &lt;chr&gt; NA, NA, NA, \"Motor\\nVehicle\\nTheft\", \"86\", \"275…\n$ ...52   &lt;chr&gt; NA, NA, NA, \"Robbery\", \"8\", \"83\", \"0\", \"12\", \"1…\n$ ...53   &lt;chr&gt; NA, NA, NA, \"Stolen\\nProperty\\nOffenses\", \"49\",…\n$ ...54   &lt;chr&gt; NA, NA, \"Crimes Against Society\", \"Animal \\nCru…\n$ ...55   &lt;chr&gt; NA, NA, NA, \"Drug/\\nNarcotic\\nOffenses\", \"572\",…\n$ ...56   &lt;chr&gt; NA, NA, NA, \"Drug/\\nNarcotic\\nViolations\", \"316…\n$ ...57   &lt;chr&gt; NA, NA, NA, \"Drug\\nEquipment\\nViolations\", \"256…\n$ ...58   &lt;chr&gt; NA, NA, NA, \"Gambling\\nOffenses\", \"0\", \"0\", \"0\"…\n$ ...59   &lt;chr&gt; NA, NA, NA, \"Betting/\\nWagering\", \"0\", \"0\", \"0\"…\n$ ...60   &lt;chr&gt; NA, NA, NA, \"Operating/\\nPromoting/\\nAssisting\\…\n$ ...61   &lt;chr&gt; NA, NA, NA, \"Gambling\\nEquipment\\nViolations\", …\n$ ...62   &lt;chr&gt; NA, NA, NA, \"Sports\\nTampering\", \"0\", \"0\", \"0\",…\n$ ...63   &lt;chr&gt; NA, NA, NA, \"Por-\\nnography/\\nObscene\\nMaterial…\n$ ...64   &lt;chr&gt; NA, NA, NA, \"Pros-\\ntitution\\nOffenses\", \"0\", \"…\n$ ...65   &lt;chr&gt; NA, NA, NA, \"Pros-\\ntitution\", \"0\", \"3\", \"0\", \"…\n$ ...66   &lt;chr&gt; NA, NA, NA, \"Assisting or\\nPromoting\\nProstitut…\n$ ...67   &lt;chr&gt; NA, NA, NA, \"Purchasing\\nProstitution\", \"0\", \"1…\n$ ...68   &lt;chr&gt; NA, NA, NA, \"Weapon\\nLaw\\nViolations\", \"61\", \"1…"
+  },
+  {
+    "objectID": "index.html#introduction---dataset-1",
+    "href": "index.html#introduction---dataset-1",
+    "title": "Project Title",
+    "section": "Introduction - dataset 1",
+    "text": "Introduction - dataset 1\nThe first dataset is specific to Arizona and includes violent crimes which are broken down into crimes against property, crimes against society and crimes against persons. Each of these categories is further broken down into a large number of subcategories. For clarity, the team focused on the three categories: Property, Persons and Society. We sought to understand how violent crime is distributed geographically, and which types of offenses are most prevalent in different areas. We aim to analyze the state of Arizona data on: crimes against persons, crimes against property and crimes against society.\nHere are the two key research questions we’re tackling using the Arizona dataset: (1) Which jurisdictions recorded the highest per-capita crime rates in 2023, and which specific offenses drove those rates? (2)How do violent crime rates in Arizona compare between urban and rural areas?\nWe propose two hypotheses for our Arizona analysis: (1) Violent crime rates will be highest in jurisdictions with the greatest population density. (2) Among violent crime categories, property offenses will occur more frequently than society offenses, which in turn will exceed offenses against persons."
+  },
+  {
+    "objectID": "index.html#justification-of-approach---data-set1",
+    "href": "index.html#justification-of-approach---data-set1",
+    "title": "Project Title",
+    "section": "Justification of approach - data set1",
+    "text": "Justification of approach - data set1\nThe chosen analysis approach and visualizations are clearly explained and justified. (4 points) Stacey"
+  },
+  {
+    "objectID": "index.html#code-and-visualization---data-set1",
+    "href": "index.html#code-and-visualization---data-set1",
+    "title": "Project Title",
+    "section": "Code and Visualization - data set1",
+    "text": "Code and Visualization - data set1\nCode is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke"
+  },
+  {
+    "objectID": "index.html#code-block-1",
+    "href": "index.html#code-block-1",
+    "title": "Project Title",
+    "section": "Code block 1",
+    "text": "Code block 1"
+  },
+  {
+    "objectID": "index.html#discussion-1-discussion-of-results-is-clear-and-correct-and-it-has-some-depth-without-begin-excessively-long.-5-points-meredith",
+    "href": "index.html#discussion-1-discussion-of-results-is-clear-and-correct-and-it-has-some-depth-without-begin-excessively-long.-5-points-meredith",
+    "title": "Project Title",
+    "section": "Discussion 1: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith",
+    "text": "Discussion 1: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith\nThe first research question : “Which jurisdictions in Arizona had the highest crime rates per capita in 2023, and which specific offenses contributed most to those rates?” Can be visualized from the scatterplot/ barplot graph #1. We see the specific offenses listed as “Property”, “Person” and “Society” by jurisdiction. It is evident that _____ jurisdiction had the highest crime rate at _____ total crimes. The highest offenses per jurisdiction are “Property/Person/Society” with _____ offenses per capita.\nThe second research question: “Do violent crime rates differ between urban and rural counties in Arizona?” Can be seen in the scatterplot/ bar graph #2. We see the specific offenses listed as “Property”, “Person” and “Society” by population. We see here that _____ jurisdiction had the highest crime rate per capita."
+  },
+  {
+    "objectID": "index.html#introduction---dataset-2-the-introduction-provides-a-clear-explanation-of-the-question-and-the-dataset-used-to-answer-the-question-including-a-description-of-all-relevant-variables-in-the-dataset.-5-points-meredith",
+    "href": "index.html#introduction---dataset-2-the-introduction-provides-a-clear-explanation-of-the-question-and-the-dataset-used-to-answer-the-question-including-a-description-of-all-relevant-variables-in-the-dataset.-5-points-meredith",
+    "title": "Project Title",
+    "section": "Introduction - dataset 2 : The introduction provides a clear explanation of the question and the dataset used to answer the question, including a description of all relevant variables in the dataset. (5 points) Meredith",
+    "text": "Introduction - dataset 2 : The introduction provides a clear explanation of the question and the dataset used to answer the question, including a description of all relevant variables in the dataset. (5 points) Meredith\nDataset 2 is a set of national property crime rates by state. This information is important, in order to better understand whether there was an association between population size and property crime across the US, and which states were most affected. The national dataset is limited to property crimes specifically. Given the vast numbers of property crimes (arson, bribery, burglary/ breaking & entry, counterfeiting, destruction, embezzlement, extortion, fraud, larceny, motor vehicle theft, robbery and stolen property), the team focused on total crime rates per state and per capita.\nWe seek to answer the following research question from the first dataset: 2. Which states had the highest and lowest property crime rates per 100,000 residents in 2023?\nWe hypothesize that : 2. Higher property crime rates nationally will be found in more densely populated states."
+  },
+  {
+    "objectID": "index.html#justification-of-approach---data-set-2",
+    "href": "index.html#justification-of-approach---data-set-2",
+    "title": "Project Title",
+    "section": "Justification of approach - data set 2",
+    "text": "Justification of approach - data set 2\nThe chosen analysis approach and visualizations are clearly explained and justified. (4 points) Stacey"
+  },
+  {
+    "objectID": "index.html#code-and-visualization---data-set-2",
+    "href": "index.html#code-and-visualization---data-set-2",
+    "title": "Project Title",
+    "section": "Code and Visualization - data set 2",
+    "text": "Code and Visualization - data set 2\nCode is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke"
+  },
+  {
+    "objectID": "index.html#discussion-2-discussion-of-results-is-clear-and-correct-and-it-has-some-depth-without-begin-excessively-long.-5-points-meredith",
+    "href": "index.html#discussion-2-discussion-of-results-is-clear-and-correct-and-it-has-some-depth-without-begin-excessively-long.-5-points-meredith",
+    "title": "Project Title",
+    "section": "Discussion 2: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith",
+    "text": "Discussion 2: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith\nThe third research question : “Which states had the highest and lowest property crime rates per 100,000 residents in 2023?” Can be visualized from the bar graph #3. We see Property crimes per capita in this plot with the state of _____ having the highest property crime rate per capita at _____ crimes per _____ population. Lastly, we can better visualize the states with the highest crime rates in the national heat map in graph #4. This shows the state of _____ has the highest property crimes."
+  },
+  {
+    "objectID": "index.html#sources",
+    "href": "index.html#sources",
+    "title": "Project Title",
+    "section": "Sources",
+    "text": "Sources\nReferenced to use across function: https://dplyr.tidyverse.org/reference/across.html\nColorblind friendly pallet: https://grafify.shenoylab.com/colour_palettes.html"
   }
 ]

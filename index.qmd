@@ -2,7 +2,7 @@
 title: "Project Title"
 subtitle: "INFO 526 - Summer 2024 - Final Project"
 author: 
-  - name: "Team name"
+  - name: "O’Dell/Pacheco/Baptiste"
     affiliations:
       - name: "School of Information, University of Arizona"
 description: "Project description"
@@ -34,6 +34,9 @@ library(gt)
 library(openintro)
 library(ggrepel)
 library(patchwork)
+library(tigris)
+library(viridis)
+library(sf)
 
 # set theme for ggplot2
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
@@ -65,70 +68,221 @@ devtools::install_github("tidyverse/dsbox")
 
 ## Introduction - dataset 1
 
-The first dataset is specific to Arizona and includes violent crimes which are broken down into crimes against property, crimes against society and crimes against persons. Each of these categories is further broken down into a large number of subcategories. For clarity, the team focused on the three categories: Property, Persons and Society. We sought to understand how violent crime is distributed geographically, and which types of offenses are most prevalent in different areas. We aim to analyze the state of Arizona data on: crimes against persons, crimes against property and crimes against society.
+Our team’s shared background in data analysis—and genuine curiosity about public safety—led us to dive into Arizona’s violent crime dataset. The data splits offenses into three overarching groups—Property, Persons, and Society—each of which contains numerous subcategories. To keep our focus sharp, we concentrated on those three main categories. We set out to map how violent crime varies across Arizona’s jurisdictions and to pinpoint which offense types dominate in different regions. In particular, we will analyze crimes against persons, crimes against property, and crimes against society throughout the state. 
 
-We seek to answer the following research questions from the first dataset: 1. Which jurisdictions in Arizona had the highest crime rates per capita in 2023, and which specific offenses contributed most to those rates? 2. Do violent crime rates differ between urban and rural areas of Arizona?
+Here are the two key research questions we’re tackling using the Arizona dataset:
+(1) Which jurisdictions recorded the highest per-capita crime rates in 2023, and which specific offenses drove those rates? 
+(2)How do violent crime rates in Arizona compare between urban and rural areas? 
 
-We hypothesize that: 1. Higher violent crimes will be found in more densely populated areas of Arizona. 2. Property crime offenses will be greater than crimes against society, which will be greater than crimes against persons.
+We propose two hypotheses for our Arizona analysis:
+(1) Violent crime rates will be highest in jurisdictions with the greatest population density.
+(2) Among violent crime categories, property offenses will occur more frequently than society offenses, which in turn will exceed offenses against persons.
 
 ## Justification of approach - data set1
 
-The chosen analysis approach and visualizations are clearly explained and justified. (4 points) Stacey
+The chosen analysis approach and visualizations are clearly explained and justified. (4 points) BROOKE TODO
 
 ## Code and Visualization - data set1
 
-Code is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke
-
-## Code block 1
-
 ```{r Arizona crime plots}
 
-# Load and remove meta data from the first 4 rows
+options(tigris_use_cache = TRUE)
+
+# Load Crime Data
 az_crimes <- read_csv(here("data", "Arizona_Offense_Type_by_Agency_2023.csv"), skip = 4, show_col_types = FALSE)
 
-# Select only city and crime columns of interest and rename
+# Crime columns to keep (all offenses) - this is the best way to do without losing a column
+crime_columns <- c(
+  "Assault\nOffenses", "Aggravated\nAssault", "Simple\nAssault", "Intimidation",
+  "Homicide\nOffenses", "Murder and\nNonnegligent\nManslaughter", "Negligent\nMan-\nslaughter",
+  "Justifiable\nHomicide", "Human\nTrafficking\nOffenses", "Commercial\nSex Acts", "Involuntary\nServitude",
+  "Kidnapping/\nAbduction", "Sex\nOffenses", "Rape", "Sodomy", "Sexual\nAssault\nWith an\nObject",
+  "Criminal\nSexual\nContact2", "Incest", "Statutory\nRape", "Arson", "Bribery", "Burglary/\nBreaking &\nEntering",
+  "Counter-\nfeiting/\nForgery", "Destruction/\nDamage/\nVandalism\nof Property", "Embezzle-\nment",
+  "Extortion/\nBlackmail", "Fraud\nOffenses", "False\nPretenses/\nSwindle/\nConfidence\nGame",
+  "Credit\nCard/\nAutomated\nTeller\nMachine\nFraud", "Imper-\nsonation", "Welfare\nFraud", "Wire\nFraud",
+  "Identity \nTheft", "Hacking/\nComputer \nInvasion", "Larceny/\nTheft\nOffenses", "Pocket-\npicking",
+  "Purse-\nsnatching", "Shop-\nlifting", "Theft\nFrom\nBuilding", "Theft\nFrom\nCoin Op-\nerated\nMachine\nor Device",
+  "Theft\nFrom\nMotor\nVehicle", "Theft of \nMotor \nVehicle\nParts or\nAcces-\nsories", "All\nOther\nLarceny",
+  "Motor\nVehicle\nTheft", "Robbery", "Stolen\nProperty\nOffenses", "Animal \nCruelty", "Drug/\nNarcotic\nOffenses",
+  "Drug/\nNarcotic\nViolations", "Drug\nEquipment\nViolations", "Gambling\nOffenses", "Betting/\nWagering",
+  "Operating/\nPromoting/\nAssisting\nGambling", "Gambling\nEquipment\nViolations", "Sports\nTampering",
+  "Por-\nnography/\nObscene\nMaterial", "Pros-\ntitution\nOffenses", "Pros-\ntitution",
+  "Assisting or\nPromoting\nProstitution", "Purchasing\nProstitution", "Weapon\nLaw\nViolations"
+)
+
+# Clean crime data - keep cities only, remove other columns 
 az_clean <- az_crimes %>%
-  select(
-    City = ...2,
-    Crimes_Against_Persons = `Crimes Against Persons`,
-    Crimes_Against_Property = `Crimes Against Property`,
-    Crimes_Against_Society = `Crimes Against Society`
-  ) %>%
-  # Remove rows where City is NA or empty
+  select(City = ...2, all_of(crime_columns)) %>%
   filter(!is.na(City) & City != "") %>%
-  # Convert crime columns to numeric
-  mutate(across(starts_with("Crimes_"), ~ as.numeric(str_replace_all(., ",", "")))) %>%
-  # Remove rows where all crime counts are NA or zero
-  filter(rowSums(across(starts_with("Crimes_"), ~ ifelse(is.na(.), 0, .))) > 0)
+  mutate(across(all_of(crime_columns), ~ as.numeric(str_remove_all(., ",")))) %>%
+  filter(!str_detect(City, regex("County|University|District|Campus|Airport|College|School|Nation|Tribal|Department|Agency", ignore_case = TRUE)))
+
+# Pivot to long format for offense counts
+az_long <- az_clean %>%
+  pivot_longer(
+    cols = all_of(crime_columns),
+    names_to = "Offense_Type",
+    values_to = "Count"
+  ) %>%
+  filter(!is.na(Count))
+
+# Total crimes per city (all offenses)
+city_totals <- az_long %>%
+  group_by(City) %>%
+  summarise(Total_Crimes = sum(Count), .groups = "drop") %>%
+  mutate(City = str_to_title(City))
+
+# Most common crime type per city (all offenses)
+city_top_crime <- az_long %>%
+  group_by(City, Offense_Type) %>%
+  summarise(Total = sum(Count), .groups = "drop") %>%
+  group_by(City) %>%
+  slice_max(Total, n = 1, with_ties = FALSE) %>%
+  select(City, Top_Offense = Offense_Type) %>%
+  mutate(City = str_to_title(City))
+
+# Download Arizona state and cities geometry
+az_state <- states(cb = TRUE) %>%
+  filter(STUSPS == "AZ")
+
+az_places <- places(state = "AZ", class = "sf") %>%
+  mutate(City = str_to_title(NAME))
+
+# Get city centers for plotting points
+az_points <- az_places %>%
+  st_centroid()
+
+# Join total crimes data to city points
+az_points <- az_points %>%
+  left_join(city_totals, by = "City")
+
+# Join most common crime data to city points - for bar plot
+az_points <- az_points %>%
+  left_join(city_top_crime, by = "City")
+
+# Geospatial Map of cities sized by total crimes
+ggplot() +
+  geom_sf(data = az_state, fill = "white", color = "black") +
+  geom_sf(data = az_points, aes(size = Total_Crimes), color = "#d6604d") +
+  geom_sf_text(data = az_points, aes(label = City), size = 2, check_overlap = TRUE) +
+  scale_size_continuous(range = c(1, 8), breaks = scales::pretty_breaks(n = 5)) +
+  labs(
+    title = "Arizona Cities by Total Number of Crimes (All Offenses)",
+    size = "Total Crimes"
+  ) +
+  theme_minimal()
+
+# Get the top five cities with the most crime and store in descending order
+top5_cities <- az_points %>%
+  filter(!is.na(Total_Crimes)) %>%
+  arrange(desc(Total_Crimes)) %>%
+  slice_head(n = 5)
+
+# Create bar plot
+ggplot(top5_cities, aes(x = Total_Crimes, y = reorder(City, Total_Crimes), fill = Top_Offense)) +
+  geom_col(width = 0.6) +
+  scale_fill_manual(values = c("#f4a582", "#d6604d", "#fddbc7")) +
+  labs(
+    title = "Top 5 Arizona Cities by Total Crimes",
+    x = "Total Crimes",
+    y = "City",
+    fill = "Most Common Crime"
+  ) +
+  theme_minimal() 
+
 
 ```
 
-## Discussion 1: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith
+## Discussion 1: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) 
+
+BROOOKE TODO
 
 The first research question : "Which jurisdictions in Arizona had the highest crime rates per capita in 2023, and which specific offenses contributed most to those rates?" Can be visualized from the scatterplot/ barplot graph #1. We see the specific offenses listed as “Property”, “Person” and “Society” by jurisdiction. It is evident that \_\_\_\_\_ jurisdiction had the highest crime rate at \_\_\_\_\_ total crimes. The highest offenses per jurisdiction are “Property/Person/Society” with \_\_\_\_\_ offenses per capita.
 
 The second research question: "Do violent crime rates differ between urban and rural counties in Arizona?" Can be seen in the scatterplot/ bar graph #2. We see the specific offenses listed as “Property”, “Person” and “Society” by population. We see here that \_\_\_\_\_ jurisdiction had the highest crime rate per capita.
 
-## Introduction - dataset 2 : The introduction provides a clear explanation of the question and the dataset used to answer the question, including a description of all relevant variables in the dataset. (5 points) Meredith
+## Introduction - dataset 2
 
-Dataset 2 is a set of national property crime rates by state. This information is important, in order to better understand whether there was an association between population size and property crime across the US, and which states were most affected. The national dataset is limited to property crimes specifically. Given the vast numbers of property crimes (arson, bribery, burglary/ breaking & entry, counterfeiting, destruction, embezzlement, extortion, fraud, larceny, motor vehicle theft, robbery and stolen property), the team focused on total crime rates per state and per capita.
+Our team’s deep experience in data analysis—and our keen interest in
+property offenses—prompted us to examine the 2023 NIBRS property-crime figures for every U.S.
+state. This dataset breaks down four key offense types—Burglary, Larceny/Theft, Vehicle Theft, and
+Vandalism—providing both total incident counts and rates per 100,000 residents. To keep our study
+focused, we zeroed in on these core categories. First, we deployed a color–shaded U.S. map to
+illustrate how overall property-crime rates vary from state to state. Then, we used a grouped bar chart to compare the breakdown of property crime subtypes across the ten states with the highest total property crime counts. Through these visuals, we aim to highlight regional trends and identify which types of property crime are most common in the states most affected.
 
-We seek to answer the following research question from the first dataset: 2. Which states had the highest and lowest property crime rates per 100,000 residents in 2023?
+Our second dataset compiles 2023 property crime rates for every U.S. state, calculated both as
+total incidents and per 100,000 residents. By focusing on NIBRS’s four core property-crime
+categories—burglary, larceny/theft, motor-vehicle theft, and vandalism—we streamline our analysis to examine how state population size correlates with overall property-crime burden and to spotlight which states bear the highest rates. We chose to utilize the major crime property types verses using all property crime types. Statistical references are more useful to our visuals and analysis if they are grouped together.
 
-We hypothesize that : 2. Higher property crime rates nationally will be found in more densely populated states.
+Proposed Research Questions:
+(1) Which states stand out as property-crime hot spots, and how do their per-capita rates compare to the national average?
+(2) Across the top ten states by property-crime volume, which subtype dominates, and how does its share fluctuate from state to state?
+
+Proposed Hypotheses:
+(1) States with large urban centers have property-crime rates per 100,000 residents that are higher than the national average, while states with predominantly rural populations have property-crime rates below the national average.
+(2) Within the top ten states by total property crimes, larceny/theft will constitute at least 60% of reported property offenses, while the proportions of vehicle theft and vandalism will differ significantly across states, reflecting underlying regional factors.
 
 ## Justification of approach - data set 2
 
-The chosen analysis approach and visualizations are clearly explained and justified. (4 points) Stacey
+Our selection of methods and visuals is driven by a desire to balance big-picture perspective with
+targeted insight, guiding readers smoothly from state-level comparisons down to specific crime-type breakdowns.
+
+First, we chose a choropleth map to leverage the brain’s natural ability to detect patterns in color. By shading each state according to its property-crime rate per 100,000 residents, the map instantly
+highlights geographic clusters—whether they’re sprawling urban corridors or economically stressed
+rural pockets—without overwhelming the audience with raw numbers. The clean legend and intuitive viridis palette direct attention to the darkest and lightest regions, making it clear where policy
+interventions or deeper investigation might be most warranted.
+
+Next, the Cleveland dot plot ranks all fifty states from lowest to highest, using distinct colors for the bottom five, middle bulk, and top five jurisdictions. Adding dashed cut-off lines emphasizes the thresholds for our outlier groups, underscoring our focus on the extremes as potential case studies. This plot complements the map by quantifying each state’s distance from the national median—nuance that color alone can’t fully convey—while keeping the visual clean and data-ink efficient.
+
+Finally, the grouped bar chart zeroes in on the ten states with the highest total property-crime
+volumes. Displaying burglary, larceny/theft, vehicle theft, and vandalism side by side, with percentage labels indicating each subtype’s share, allows us to unpack the composite factors behind those soaring totals. This layered strategy—from map to ranking to subtype breakdown—ensures readers see the forest, then the trees, and finally the leaves, enabling both macro- and micro-level interpretation. This approach shines a spotlight on state-by-state hotspots and outliers while peeling back the layers to show which property-crime categories drive each state’s overall rate—keeping our visuals laser-focused on the questions we set out to answer.
 
 ## Code and Visualization - data set 2
 
-Code is correct, easy to read, properly formatted, and properly documented. (2.5 points) Brooke The visualizations are appropriate, easy to read, and properly labeled. (5 points) Brooke
+```{r Arizona crime plots}
+# TODO ASK STACEY
+
+```
+
+The R script is structured into clearly labeled sections, each introduced with brief comments. It begins by loading the dataset and then builds three plot-ready data frames: one merged with
+map_data(&quot;state&quot;) for the choropleth, another with custom y-positions and group labels for the Cleveland dot plot, and a third in long format (with percentage shares) for the grouped bar chart. Every ggplot2 call incorporates custom scales, handpicked color palettes, informative titles, and refined themes—making the entire workflow reproducible and immediately understandable.
 
 ## Discussion 2: Discussion of results is clear and correct, and it has some depth without begin excessively long. (5 points) Meredith
 
-The third research question : "Which states had the highest and lowest property crime rates per 100,000 residents in 2023?" Can be visualized from the bar graph #3. We see Property crimes per capita in this plot with the state of \_\_\_\_\_ having the highest property crime rate per capita at \_\_\_\_\_ crimes per \_\_\_\_\_ population. Lastly, we can better visualize the states with the highest crime rates in the national heat map in graph #4. This shows the state of \_\_\_\_\_ has the highest property crimes.
+RQ1: Which states emerge as outliers in property-crime rates, and how do their per-capita figures
+compare?
+
+Our choropleth map and Cleveland dot plot highlight the District of Columbia, New Mexico, and
+Washington as the clear high-rate outliers, whereas Idaho, New Hampshire, and Maine occupy the
+lowest positions on the spectrum (FBI, 2025). These disparities underscore how urban density,
+economic stress, and transient populations—such as DC’s daily commuter influx—can amplify
+opportunities for property offenses. In contrast, states with more rural character appear to benefit from tighter-knit communities and lower population concentrations, which likely suppress overall property-crime burdens (FBI, 2025).
+
+RQ2: Within the ten states with the largest total property-crime counts, which subtype predominates, and how much variation exists?
+
+Larceny/theft always accounts for a majority of the incidents across the highest-volume states,
+underscoring its dominant role in overall property-crime patterns (FBI, 2025). The other portions of vehicle theft and vandalism are completely inconsistent. Nevada and New Mexico account for
+elevated vandalism incidents. Colorado’s higher vehicle-theft rate may reflect its metropolitan parking dynamics (FBI, 2025). Each state has a unique set of circumstances to include poverty, population count, rural/suburban/urban status, etc. As a result, the type and amount of property crime will vary greatly across the United States.
 
 ## Sources
 
 Referenced to use across function: https://dplyr.tidyverse.org/reference/across.html
+
+Colorblind friendly pallet: https://grafify.shenoylab.com/colour_palettes.html 
+
+Referenced for pretty breaks function to make spacing in arizona map readable:
+https://cran.r-project.org/web/packages/scales/index.html
+
+Referenced for sf package and functions including centroid() to compute center points for cities:
+https://cran.r-project.org/web/packages/sf/index.html
+
+Referenced for tigris package and functions:
+https://cran.r-project.org/web/packages/tigris/tigris.pdf
+
+For data used:
+Federal Bureau of Investigation. (2025). National Incident-Based Reporting System 2023 property-
+crime extract files [Data set]. U.S. Department of Justice, Office of Justice Programs.
+https://www.ojp.gov/library/publications/national-incident-based-reporting-system-2023-extract-files
+
+
